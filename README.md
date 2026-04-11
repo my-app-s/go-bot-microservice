@@ -1,4 +1,11 @@
 # Go bot microservice
+
+> [!NOTE]
+> 
+> ![Go Version](https://img.shields.io/badge/go-1.25%2B-blue.svg)
+> ![License](https://img.shields.io/badge/license-GNU%20AGPLv3-red.svg)
+> ![status: dev](https://img.shields.io/badge/status-dev-orange)
+
 ```text
 go_bot_project/
 ├── .env                # Секреты (Токен, Пароли)
