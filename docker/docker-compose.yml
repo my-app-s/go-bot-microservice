@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: db_server
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: bot_db
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    networks:
+      - bot_net
+
+  bot:
+    build: ./bot
+    container_name: tg_bot
+    restart: always
+    depends_on:
+      - db
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      # Адрес БД — это имя сервиса 'db'
+      DB_DSN: "host=db user=${DB_USER} password=${DB_PASSWORD} dbname=bot_db port=5432 sslmode=disable"
+    networks:
+      - bot_net
+
+networks:
+  bot_net:
+    driver: bridge
