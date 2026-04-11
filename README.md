@@ -1,3 +1,5 @@
+# go-bot-microservice
+```text
 go_bot_project/
 ├── .env                # Секреты (Токен, Пароли)
 ├── docker-compose.yml  # Оркестрация контейнеров
@@ -6,6 +8,7 @@ go_bot_project/
     ├── main.go         # Код бота на Go
     ├── go.mod          # Зависимости
     └── Dockerfile      # Инструкция сборки
+```
 
 ---
 
