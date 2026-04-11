@@ -1,4 +1,4 @@
-# go-bot-microservice
+# Go bot microservice
 ```text
 go_bot_project/
 ├── .env                # Секреты (Токен, Пароли)
