@@ -19,26 +19,13 @@ go_bot_project/
 
 ---
 
-## ⚠️ Disclaimer / Отказ от ответственности
+## 📜 Disclaimer
 
-### English Version
-This project is an **independent development** provided on an **"AS IS"** basis.
-* **Liability:** In no event shall the author be liable for any errors, bugs, or data loss arising from the use of this software.
-* **Status:** This is an experimental tool. Always verify the generated HTML output before deployment.
+**English**: Materials are provided ***as is*** under the LICENSE file. No warranties, no rights granted unless explicitly stated. Authors are not liable for damages. No partnership or obligations created.  
 
-> [!CAUTION]
-> Any use (operation) of this code is at your own risk.
+**Русский**: Материалы предоставляются ***как есть*** и регулируются LICENSE. Гарантий нет, права не передаются без явного указания. Автор(ы) не несут ответственности. Партнёрство или обязательства не создаются.  
 
----
-
-### Русская версия
-Данный проект является **независимой разработкой** и предоставляется «как есть».
-
-* **Ответственность:** Автор не несет ответственности за любые ошибки, баги или потерю данных, возникшие в результате использования данного кода.
-* **Статус:** Это экспериментальный инструмент. Проверяйте сгенерированный HTML перед деплоем.
-
-> [!CAUTION]
-> Любое использование (эксплуатация) данного кода осуществляется на ваш страх и риск.
+📌 See full disclaimer in [DISCLAIMER.md](https://github.com/my-app-s/my-app-s/blob/main/DISCLAIMER.md)
 
 ---
 
