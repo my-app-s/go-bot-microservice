@@ -25,7 +25,7 @@ go_bot_project/
 
 **Русский**: Материалы предоставляются ***как есть*** и регулируются LICENSE. Гарантий нет, права не передаются без явного указания. Автор(ы) не несут ответственности. Партнёрство или обязательства не создаются.  
 
-📌 See full disclaimer in [DISCLAIMER.md](./DISCLAIMER.md)
+📌 See full disclaimer in [DISCLAIMER.md](https://github.com/my-app-s/my-app-s/blob/main/DISCLAIMER.md)
 
 ---
 
