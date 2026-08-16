@@ -1,0 +1,57 @@
+name: Build and Deploy Landing
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout Landing Repository (конфиг и редми)
+        uses: actions/checkout@v4
+        with:
+          path: landing-source
+
+      - name: Checkout Generator Repository (исходники генератора на Go)
+        uses: actions/checkout@v4
+        with:
+          repository: 'my-app-s/go-generator'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: generator-source
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+          cache: false
+
+      - name: Build and Run Generator
+        run: |
+          # Переносим актуальные config.json и README.md в папку генератора
+          cp landing-source/config.json generator-source/
+          cp landing-source/README.md generator-source/
+
+          # Запускаем сборку
+          cd generator-source
+          go run main.go
+
+          # Возвращаем готовую папку dist в корень для деплоя
+          mv dist ../dist
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
