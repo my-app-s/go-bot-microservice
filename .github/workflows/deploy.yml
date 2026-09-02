@@ -1,57 +1,45 @@
-name: Build and Deploy Landing
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "deploy"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
-
     steps:
-      - name: Checkout Landing Repository (конфиг и редми)
-        uses: actions/checkout@v4
-        with:
-          path: landing-source
+      - name: Checkout Repository
+        uses: actions/checkout@v7
 
-      - name: Checkout Generator Repository (исходники генератора на Go)
-        uses: actions/checkout@v4
-        with:
-          repository: 'my-app-s/go-generator'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: generator-source
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
-          cache: false
-
-      - name: Build and Run Generator
-        run: |
-          # Переносим актуальные config.json и README.md в папку генератора
-          cp landing-source/config.json generator-source/
-          cp landing-source/README.md generator-source/
-
-          # Запускаем сборку
-          cd generator-source
-          go run main.go
-
-          # Возвращаем готовую папку dist в корень для деплоя
-          mv dist ../dist
+      - name: Checkout Generator Repository
+        uses: my-app-s/go-generator@v1
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: 'dist'
+          retention-days: 1
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
